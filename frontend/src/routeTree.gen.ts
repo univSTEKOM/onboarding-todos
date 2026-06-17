@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TodosRouteImport } from './routes/todos'
 import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as ProfileRouteImport } from './routes/profile'
 import { Route as IndexRouteImport } from './routes/index'
@@ -24,6 +25,11 @@ import { Route as authAcceptInviteRouteImport } from './routes/(auth)/accept-inv
 import { Route as databasesrolesRolesRouteImport } from './routes/(databases)/(roles)/roles'
 import { Route as databasespermissionsPermissionsRouteImport } from './routes/(databases)/(permissions)/permissions'
 
+const TodosRoute = TodosRouteImport.update({
+  id: '/todos',
+  path: '/todos',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SettingsRoute = SettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
@@ -100,6 +106,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/profile': typeof ProfileRoute
   '/settings': typeof SettingsRoute
+  '/todos': typeof TodosRoute
   '/accept-invite': typeof authAcceptInviteRoute
   '/forgot-password': typeof authForgotPasswordRoute
   '/login': typeof authLoginRoute
@@ -116,6 +123,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/profile': typeof ProfileRoute
   '/settings': typeof SettingsRoute
+  '/todos': typeof TodosRoute
   '/accept-invite': typeof authAcceptInviteRoute
   '/forgot-password': typeof authForgotPasswordRoute
   '/login': typeof authLoginRoute
@@ -133,6 +141,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/profile': typeof ProfileRoute
   '/settings': typeof SettingsRoute
+  '/todos': typeof TodosRoute
   '/(auth)/accept-invite': typeof authAcceptInviteRoute
   '/(auth)/forgot-password': typeof authForgotPasswordRoute
   '/(auth)/login': typeof authLoginRoute
@@ -151,6 +160,7 @@ export interface FileRouteTypes {
     | '/'
     | '/profile'
     | '/settings'
+    | '/todos'
     | '/accept-invite'
     | '/forgot-password'
     | '/login'
@@ -167,6 +177,7 @@ export interface FileRouteTypes {
     | '/'
     | '/profile'
     | '/settings'
+    | '/todos'
     | '/accept-invite'
     | '/forgot-password'
     | '/login'
@@ -183,6 +194,7 @@ export interface FileRouteTypes {
     | '/'
     | '/profile'
     | '/settings'
+    | '/todos'
     | '/(auth)/accept-invite'
     | '/(auth)/forgot-password'
     | '/(auth)/login'
@@ -200,6 +212,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ProfileRoute: typeof ProfileRoute
   SettingsRoute: typeof SettingsRoute
+  TodosRoute: typeof TodosRoute
   authAcceptInviteRoute: typeof authAcceptInviteRoute
   authForgotPasswordRoute: typeof authForgotPasswordRoute
   authLoginRoute: typeof authLoginRoute
@@ -215,6 +228,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/todos': {
+      id: '/todos'
+      path: '/todos'
+      fullPath: '/todos'
+      preLoaderRoute: typeof TodosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/settings': {
       id: '/settings'
       path: '/settings'
@@ -320,6 +340,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ProfileRoute: ProfileRoute,
   SettingsRoute: SettingsRoute,
+  TodosRoute: TodosRoute,
   authAcceptInviteRoute: authAcceptInviteRoute,
   authForgotPasswordRoute: authForgotPasswordRoute,
   authLoginRoute: authLoginRoute,

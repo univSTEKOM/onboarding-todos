@@ -1,4 +1,5 @@
 import {
+  CheckSquare,
   Database,
   Image as ImageIcon,
   Key,
@@ -54,8 +55,15 @@ export const sidebarData: Array<NavGroup> = [
         href: '/',
         menuPermission: MENU_PERMISSIONS.dashboard,
       },
+      {
+        key: 'todos',
+        icon: <CheckSquare size={20} />,
+        label: 'Todo List',
+        href: '/todos',
+      },
     ],
   },
+  // ... ke bawahnya biarkan tetap sama, jangan diubah
   {
     title: 'Management',
     items: [
